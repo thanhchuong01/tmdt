@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Trà sữa</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+
+    {% block cssblock %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    
+
+    {% include 'homepage/topbar.html' %}
+
+    {% if messages %}
+        {% for message in messages %}
+        <div style="margin-top: 5rem;" class="alert alert-{{ message.tags }} alert-dismissible fade show " >
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% include 'homepage/footer.html' %}
+ 
+    {% block jsblock %}
+    {% endblock %}
+
+</body>
+
+</html>

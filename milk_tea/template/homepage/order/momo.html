@@ -1,0 +1,82 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+
+
+
+{% block cssblock %}
+
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'homepage/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'homepage/css/style.css' %}" rel="stylesheet">
+
+    {% endblock %}
+
+    {% block content %}
+
+
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="/">Home</a>
+                    <a class="breadcrumb-item text-dark" href="/product">Menu</a>
+                    <span class="breadcrumb-item active">Thanh toán Momo</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+         
+                    <h1 style="text-align: center;">Quét mã để thanh toán</h1>                  
+                    <h6 style="text-align:center "> Đơn sẽ bị hủy trong 10 phút nếu bạn không thanh toán!</h6>
+            </div>
+        </div>
+    </div>
+    
+   <img style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" 
+   src="https://momosv3.apimienphi.com/api/QRCode?phone=0933004939&amount={{dh.tongTien}}&note=Đơn hàng {{dh.maDH}}">
+   
+   <a class="btn btn-block btn-primary font-weight-bold py-3" href="/customer">Xác nhận đã thanh toán</a>
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    {% endblock %}
+
+    {% block jsblock %}
+
+    
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'homepage/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'homepage/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'homepage/mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'homepage/mail/contact.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'homepage/js/main.js' %}"></script>
+    {% endblock %}

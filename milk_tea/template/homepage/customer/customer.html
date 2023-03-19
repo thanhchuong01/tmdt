@@ -1,0 +1,408 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+
+
+
+{% block cssblock %}
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'homepage/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'homepage/css/style.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a4e6fc71fe.js" crossorigin="anonymous"></script>
+    <style>
+
+        .title_inprocess{
+            height: 2.5rem;
+            background-color: #FFD333;
+            border: 2px solid  #6C757D;
+        }
+
+        .title_completed{
+            height: 2.5rem;
+            background-color: #6C757D;
+            border: 2px solid gray;
+            color: white;
+        }
+
+        .title_inprocess_text{
+            margin: auto;
+            padding: 10px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color:  #6C757D;
+        }
+
+         .title_completed_text{
+            margin: auto;
+            padding: 10px;
+            font-size: 1.3rem;
+            font-weight: 800;
+         }
+
+        .display_block{
+            display: block !important;
+        }
+
+        .display_none{ display: none;}
+
+        .action_active{
+            transform: rotate(-90deg);
+            margin-top: 10px;
+        }
+
+        .action_bar{
+            margin: 0rem 1rem 0rem 5rem ;
+            cursor: pointer;
+            float :left;
+
+        }
+
+        .action{
+            padding-top: 10px;
+        }
+
+        .container_order_inprocess{
+            float: left;
+        }
+
+        .group_order_board{
+            margin: 0 10rem 0 10rem;
+        }
+
+        .order_inprocess{
+            max-width: fit-content;
+            float: left;
+            margin: 1.2rem;
+            border: 2px solid blue;
+            border-radius: 1.2rem;
+        }
+
+        .order_details ul {
+            padding: 1rem 1rem 0rem ;
+        }
+
+        .order_details ul li {
+            list-style: none;
+        }
+
+        .order_status{
+            background-color: orange;
+            border-radius: 0rem 0rem 1.1rem 1.1rem;
+            height: 1.75rem;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .order_board{
+            max-width: fit-content;
+            float: left;
+            margin: 1.2rem;
+            border: 2px solid grey;
+            border-radius: 1.2rem;
+        }
+
+        .order_status{
+            padding: 0 20px 0 20px;
+        }
+
+          .background_verify{
+        display: block;
+        position: fixed;
+        background-color: rgb(255 255 255 / 80%);
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        }
+
+        .verify{
+            position: fixed;
+            margin: auto;
+            z-index: 10;
+            width: 30rem;
+            height: 8rem;
+            top: 50%;
+            left: 50%;
+            background: yellow;
+            transform: translate(-50%, -50%);
+            border: solid 0.1rem red;
+            border-radius: 0.5rem;
+            }
+        .verify_label{
+            height: 30%;
+            margin: auto;
+            vertical-align: middle;
+            width: fit-content;
+            font-size: 1.4rem;
+            margin-top: 1rem;
+            font-weight: 1000;
+            color: black;
+        }
+        .verify_action{
+            margin: auto;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            flex-wrap: nowrap;
+            width: 80%;
+        }
+        .verify_btn{
+            border-radius: 0.5rem;
+            width: 7rem;
+            height: 2.3rem;
+            border-radius: 0.5rem;
+            font-weight: 800;
+            }
+
+        .verifydel{
+            display: none;
+        }
+
+          #verify_btnaccept:hover{
+            background-color: #041d69;
+        }
+        #verify_btncancle:hover{
+            background-color: #a91204;
+        }
+
+    </style>
+
+    {% endblock %}
+
+
+    {% block content %}
+        
+   
+
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="/">Home</a>
+                    <a class="breadcrumb-item text-dark" href="product">Menu</a>
+                    <span class="breadcrumb-item active">Đơn của bạn</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+<div class="container_order_inprocess clearfix">
+    <div class="title_inprocess">
+        <div class="title_inprocess_text">Đơn hàng đang đặt</div>
+    </div>
+    <div class="group_order_board">
+<!--Order in process -->
+    {% for item in listdh %}
+        {% if item.trangThaiDH == '1' %}
+        <div class="order_inprocess order_board">
+            <div class="index_order"> Mã đơn hàng: {{ item.maDH }} </div>
+            <div class="order_details">
+                <ul>
+                    <li> Tổng tiền: {{ item.tongTien }} VND</li>
+                    <li> Ngày đặt: {{ item.ngayLap }} </li>
+                    <li> Mã khuyến mãi: {{ item.maKM }} </li>
+                    <li> Hình toán thanh toán: {{ item.maTT }} </li>
+                </ul>
+            </div>
+            <div class="order_status">
+                <div class="status_label" style="float:left; width: 65%;"> Đang đợi </div>
+                <button class="btn-primary" style="margin: 1px;border: 2px solid; padding: 0;" onclick="delete_dh({{ item.maDH }})" >Hủy đơn</button>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+
+     {% for item in listdh %}
+        {% if item.trangThaiDH == '2' %}
+        <div class="order_inprocess order_board">
+            <div class="index_order"> Mã đơn hàng: {{ item.maDH }} </div>
+            <div class="order_details">
+                <ul>
+                    <li> Tổng tiền: {{ item.tongTien }} VND</li>
+                    <li> Ngày đặt: {{ item.ngayLap }} </li>
+                    <li> Mã khuyến mãi: {{ item.maKM }} </li>
+                    <li> Hình toán thanh toán: {{ item.maTT }} </li>
+                </ul>
+            </div>
+            <div class="order_status"> Đã xác nhận </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+     {% for item in listdh %}
+        {% if item.trangThaiDH == '3' %}
+        <div class="order_inprocess order_board">
+            <div class="index_order"> Mã đơn hàng: {{ item.maDH }} </div>
+            <div class="order_details">
+                <ul>
+                    <li> Tổng tiền: {{ item.tongTien }} VND</li>
+                    <li> Ngày đặt: {{ item.ngayLap }} </li>
+                    <li> Mã khuyến mãi: {{ item.maKM }} </li>
+                    <li> Hình toán thanh toán: {{ item.maTT }} </li>
+                </ul>
+            </div>
+            <div class="order_status"> Đang chuẩn bị </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+     {% for item in listdh %}
+        {% if item.trangThaiDH == '4' %}
+        <div class="order_inprocess order_board">
+            <div class="index_order"> Mã đơn hàng: {{ item.maDH }} </div>
+            <div class="order_details">
+                <ul>
+                    <li> Tổng tiền: {{ item.tongTien }} VND</li>
+                    <li> Ngày đặt: {{ item.ngayLap }} </li>
+                    <li> Mã khuyến mãi: {{ item.maKM }} </li>
+                    <li> Hình toán thanh toán: {{ item.maTT }} </li>
+                </ul>
+            </div>
+            <div class="order_status"> Đang vận chuyển </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+</div>
+<!-- Order Complete-->
+
+<div class="container_order_completed clearfix">
+    <div class="title_completed" style="float: left; width: 100%;">
+        <div class="title_completed_text" style="float: left;">Đơn hàng đã nhận </div>
+        <div class="action_bar action" > ...bấm vào đây để xem thêm </div>
+         <i class="fa fa-chevron-left action btn_action" aria-hidden="true" style="cursor: pointer; padding-top: 15px;"></i>
+    </div>
+    <div class="display" style="display: none;" id="id_display_order" >
+    <div class="group_order_board">
+    {% for item in listdh %}
+        {% if item.trangThaiDH == '5' %}
+        <div class="order_completed order_board">
+            <div class="index_order">Mã đơn hàng {{ item.maDH }} </div>
+            <div class="order_details">
+                <ul>
+                    <!-- <li> Mã đơn hàng:  {{ item.maDH }} </li> -->
+                    <li> Tổng tiền: {{ item.tongTien }} VND</li>
+                    <li> Ngày đặt: {{ item.ngayLap }} </li>
+                    <li> Mã khuyến mãi: {{ item.maKM }} </li>
+                    <li> Hình toán thanh toán: {{ item.maTT }} </li>
+                </ul>
+            </div>
+            <div class="order_status"> Đã hoàn thành </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+        </div>
+    </div>
+
+</div>
+<!--    PopUp hủy đơn hàng -->
+    <div class="background_verify" id="bgverify_del" style="display: none;" onclick="hid(this);">
+    <div class="verify" id="verifydel">
+        <div class="verify_label verifydel_label"> Bạn muốn hủy đơn hàng này?</div>
+        <div class="verify_action verifydel_action">
+            <button class="verify_btn btn btn-primary" id="verify_btnaccept"> Xóa đơn </button>
+            <button class="verify_btn btn btn-primary" id="verify_btncancle"> Hủy </button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    {% endblock %}
+
+    {% block jsblock %}
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'homepage/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'homepage/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'homepage/mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'homepage/mail/contact.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'homepage/js/main.js' %}"></script>
+
+    <script>
+
+
+        document.querySelector('.action').addEventListener('click', function(event) {
+        event.preventDefault();
+        var target = document.querySelector('.display');
+        var target2 = document.querySelector('.btn_action');
+
+        if (target.classList.contains('display_block')) {
+            target.classList.remove('display_block');
+            target2.classList.remove('action_active');
+        } else {
+            target.classList.add('display_block');
+            target2.classList.add('action_active');
+        }
+        });
+
+
+
+        document.querySelector('.btn_action').addEventListener('click', function(event) {
+        event.preventDefault();
+        var target = document.querySelector('.display');
+        var target2 = document.querySelector('.btn_action');
+
+        if (target.classList.contains('display_block')) {
+            target.classList.remove('display_block');
+            target2.classList.remove('action_active');
+        } else {
+            target.classList.add('display_block');
+            target2.classList.add('action_active');
+        }
+        });
+
+    
+         function delete_dh(input_id) {
+            csscla = document.getElementById("bgverify_del");
+            csscla.style.display = "block";
+            csscla.getElementsByTagName("button").verify_btnaccept.name = input_id;
+
+             csscla.getElementsByTagName("button").verify_btnaccept.onclick = function() {
+                console.log(typeof(input_id));
+                console.log(input_id);
+                urlmask= '{% url 'cancel_dh' 'input_id' %}'.replace('input_id', input_id);
+                console.log(urlmask);
+                window.location.href = urlmask;
+             }
+
+            csscla.getElementsByTagName("button").verify_btncancle.onclick = function() {
+                csscla.style.display = "none";
+            }
+        }
+
+        
+        function hid(element){
+            element.style.display = "none";
+            }
+
+
+       </script>
+
+{% endblock %}

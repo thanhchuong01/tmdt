@@ -1,0 +1,148 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+
+
+
+{% block cssblock %}
+
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'homepage/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'homepage/css/style.css' %}" rel="stylesheet">
+
+    {% endblock %}
+
+    {% block content %}
+  
+
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="/">Home</a>
+                    <a class="breadcrumb-item text-dark" href="/product">Menu</a>
+                    <span class="breadcrumb-item active">Giỏ hàng </span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Cart Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-light table-borderless table-hover text-center mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Món</th>
+                            <th>Size</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+
+                        {% for item in cart_items %}
+
+                        <tr>
+                            <td class="align-middle"><img src="/image/{{item.maMon.hinhAnh}}" alt="" style="width: 50px;"> {{item.maMon.tenMon}}</td>
+                            <td class="align-middle">{{item.size}}</td>
+                            <td class="align-middle">{{item.giaMon}} VND</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <a href="down/{{item.maCTGH}}" class="btn btn-sm btn-primary btn-minus" >
+                                        <i class="fa fa-minus"></i>
+                                        </a>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" name="quantity" id="quantity" value="{{item.soLuong}}" readonly >
+                                    <div class="input-group-btn">
+                                        <a href="up/{{item.maCTGH}}" class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- <td class="align-middle">{{total}} VND</td> -->
+                            <td class="align-middle">
+                                <a href="remove-cart/{{item.maCTGH}}" class="btn btn-danger btn-circle btn-sm">
+                                <i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                       
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Hóa đơn</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5>Tổng </h5>
+                            <h5>{{total}} VND</h5>
+                        </div>
+                        <a href="/checkout" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Tiếp tục</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    {% endblock %}
+
+    {% block jsblock %}
+
+    <!-- <script>
+        function setQuantity(upordown) {
+        var quantity = document.getElementById('quantity');
+
+        if (quantity.value > 1) {
+            if (upordown == 'up'){++document.getElementById('quantity').value;}
+            else if (upordown == 'down'){--document.getElementById('quantity').value;}}
+        else if (quantity.value == 1) {
+            if (upordown == 'up'){++document.getElementById('quantity').value;}}
+        else
+            {document.getElementById('quantity').value=1;}
+        }
+    </script> -->
+
+    <!-- JavaScript Libraries -->
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'homepage/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'homepage/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'homepage/mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'homepage/mail/contact.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'homepage/js/main.js' %}"></script>
+    {% endblock %}

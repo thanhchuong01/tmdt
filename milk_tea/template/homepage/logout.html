@@ -1,0 +1,37 @@
+{% extends "homepage/base.html" %}
+{% load static %}
+{% block title %}Logout{% endblock title %}
+
+{% block cssblock %}
+    <!-- Favicon -->
+    <link href="{% static 'homepage/img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'homepage/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'homepage/css/style.css' %}" rel="stylesheet">
+
+    {% endblock %}
+
+{% block content %}
+    <div class="card" style="text-align: center;" >
+        <div class="card-body">
+        <h5 class="card-title">Đăng xuất thành công</h5>
+        <p class="card-text">
+            Cảm ơn bạn đã ghé qua website cửa hàng của chúng tôi. Hy vọng bạn thích các sản phẩm của chúng tôi.
+        </p>
+        <br><hr><a href="{% url 'login' %}" class="btn btn-primary">Đăng nhập lại</a>
+        </div>
+    </div>
+
+
+{% endblock content %}
