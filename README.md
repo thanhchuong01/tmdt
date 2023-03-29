@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Milk tea website
 
 1. How to run 
@@ -15,4 +14,3 @@
 
 =======
 # tmdt
->>>>>>> 25435ec80f853bc7eb0018d64282a3239697b981
