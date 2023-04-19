@@ -1,4 +1,4 @@
-# Milk tea website
+# Milk tea website project 
 
 1. How to run 
   * if use VSCode allow \venv\Scripts\activate 
