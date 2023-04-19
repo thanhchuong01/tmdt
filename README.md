@@ -15,7 +15,7 @@ How to run ?
  6. Run the command: ```python manage.py makemigrations``` 
 for check the change of database model
  7. Next ```python manage.py migrate``` 
-Install databse model into database management system ***setting.py***
+<sup>it will install databse model into database management system ***setting.py*** </sup>
  8. Next```python manage.py createsuperuser``` 
 to create admin account of systems, you use that account to login on Admin side of Django 
 9. Finally, run ```python manage.py runserver ```
