@@ -20,4 +20,4 @@ to create admin account of systems, you use that account to login on Admin side 
 9. Finally, run ```python manage.py runserver ``` <br>
 the server Django will run on localhost and auto open default Web brower, run project! 
 =======
-# tmdt
+
